@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Inventario de Ansiedad de Beck - BAI</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inventario de Ansiedad de Beck - BAI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
     .fade-in {
       opacity: 0;
       animation: fadeIn ease-in 1;
       animation-fill-mode: forwards;
       animation-duration: 1s;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
@@ -22,45 +19,55 @@
   </style>
 </head>
 <body class="bg-gradient-to-br from-gray-50 to-indigo-100 min-h-screen flex flex-col items-center justify-start p-6 scroll-smooth">
-<div class="max-w-3xl w-full bg-white rounded-2xl shadow-xl p-8 mt-6 transition duration-500 ease-in-out fade-in">
-<h1 class="text-3xl sm:text-4xl font-extrabold text-indigo-800 text-center mb-4 tracking-tight">Inventario de Ansiedad de Beck (BAI)</h1>
-<p class="text-center text-base sm:text-lg text-gray-700 mb-6 leading-relaxed">
+  <div class="max-w-3xl w-full bg-white rounded-2xl shadow-xl p-8 mt-6 transition duration-500 ease-in-out fade-in">
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-indigo-800 text-center mb-4 tracking-tight">Inventario de Ansiedad de Beck (BAI)</h1>
+    <p class="text-center text-base sm:text-lg text-gray-700 mb-6 leading-relaxed">
       Este formulario es parte de un estudio académico realizado por <strong>Viviana Samudio</strong>.<br/>
       El <strong>BAI</strong> permite medir los niveles de ansiedad en personas adultas y es completamente anónimo, salvo que decidas dejar un medio de contacto para recibir tus resultados.
     </p>
-<form class="space-y-6" id="baiForm">
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<input class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" max="99" name="edad" placeholder="Edad" required="" type="number"/>
-<select class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" name="sexo" required="">
-<option value="">Sexo</option>
-<option value="Femenino">Femenino</option>
-<option value="Masculino">Masculino</option>
-<option value="Otro">Otro</option>
-</select>
-<input class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" name="profesion" placeholder="Profesión" required="" type="text"/>
-<select class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" name="area" required="">
-<option value="">Área de trabajo</option>
-<option value="Hospitalaria">Hospitalaria</option>
-<option value="No hospitalaria">No hospitalaria</option>
-</select>
-</div>
-<div class="space-y-4" id="preguntas"></div>
-<div class="mt-8">
-<label class="block mb-2 font-medium text-gray-800">¿Te gustaría recibir tus resultados?</label>
-<select class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" id="deseaContacto" name="deseaContacto">
-<option value="no">No, gracias</option>
-<option value="si">Sí, me gustaría</option>
-</select>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 hidden mt-4" id="contactoOpcional">
-<input class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" name="email" placeholder="Correo electrónico (opcional)" type="email"/>
-<input class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" name="telefono" placeholder="Teléfono (opcional)" type="tel"/>
-</div>
-<button class="bg-indigo-600 text-white font-bold py-2 px-6 rounded-xl hover:bg-indigo-700 transition duration-300 ease-in-out shadow-lg" type="submit">Enviar respuestas</button>
-</form>
-<p class="mt-10 text-center text-sm text-gray-600 italic leading-relaxed">Gracias por tu tiempo y por contribuir a esta investigación.<br/>Con cariño y compromiso académico,<br/><strong>Viviana Samudio</strong></p>
-</div>
-<script>
+
+    <form class="space-y-6" id="baiForm">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <input class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" max="99" name="edad" placeholder="Edad" required type="number"/>
+        <select class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" name="sexo" required>
+          <option value="">Sexo</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Otro">Otro</option>
+        </select>
+        <input class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" name="profesion" placeholder="Profesión" required type="text"/>
+        <select class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" name="area" required>
+          <option value="">Área de trabajo</option>
+          <option value="Hospitalaria">Hospitalaria</option>
+          <option value="No hospitalaria">No hospitalaria</option>
+        </select>
+      </div>
+
+      <div class="space-y-4" id="preguntas"></div>
+
+      <div class="mt-8">
+        <label class="block mb-2 font-medium text-gray-800">¿Te gustaría recibir tus resultados?</label>
+        <select class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" id="deseaContacto" name="deseaContacto">
+          <option value="no">No, gracias</option>
+          <option value="si">Sí, me gustaría</option>
+        </select>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 hidden mt-4" id="contactoOpcional">
+        <input class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" name="email" placeholder="Correo electrónico (opcional)" type="email"/>
+        <input class="p-2 border rounded-xl w-full shadow-inner focus:ring focus:ring-indigo-200" name="telefono" placeholder="Teléfono (opcional)" type="tel"/>
+      </div>
+
+      <button class="bg-indigo-600 text-white font-bold py-2 px-6 rounded-xl hover:bg-indigo-700 transition duration-300 ease-in-out shadow-lg" type="submit">Enviar respuestas</button>
+    </form>
+
+    <p class="mt-10 text-center text-sm text-gray-600 italic leading-relaxed">
+      Gracias por tu tiempo y por contribuir a esta investigación.<br/>
+      Con cariño y compromiso académico,<br/><strong>Viviana Samudio</strong>
+    </p>
+  </div>
+
+  <script>
     const preguntas = [
       "Entumecimiento u hormigueo", "Sensación de calor", "Temblor en las piernas",
       "Incapaz de relajarse", "Miedo a que ocurra lo peor", "Mareo o aturdimiento",
@@ -119,78 +126,26 @@
         deseaContacto: form.deseaContacto.value,
         email: form.email?.value || "",
         telefono: form.telefono?.value || "",
-        respuestas,
         total,
-        nivel
+        nivel,
+        respuestas: respuestas.join(", ")
       };
 
       const xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://script.google.com/macros/s/AKfycby4PH7tj-uQRogD9SNTIJZoNRvnjvI3OIn_PDiSMC_WBG1EDjsPhKSfmdG9oF7m00oApw/exec", true);
+      xhr.open("POST", "https://api.sheetbest.com/sheets/6a1b8ec0-c387-454b-b8fb-168b2ddfff16", true);
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onload = function () {
-        if (xhr.status === 200) {
+        if (xhr.status === 200 || xhr.status === 201) {
           alert("¡Formulario enviado con éxito! Muchas gracias por participar.");
           form.reset();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
           alert("Error al enviar el formulario.");
+          console.error(xhr.responseText);
         }
       };
       xhr.send(JSON.stringify(datos));
     });
   </script>
-<script>
-window.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('formulario');
-  if (!form) return;
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const boton = document.getElementById('botonEnviar');
-    boton.disabled = true;
-    boton.innerText = 'Enviando...';
-
-    const data = Object.fromEntries(new FormData(form));
-    const respuestas = [];
-    for (let i = 1; i <= 21; i++) {
-      respuestas.push(parseInt(data['r' + i]) || 0);
-    }
-
-    const total = respuestas.reduce((a, b) => a + b, 0);
-    let nivel = '';
-    if (total < 22) nivel = 'Ansiedad mínima';
-    else if (total < 36) nivel = 'Ansiedad leve';
-    else if (total < 50) nivel = 'Ansiedad moderada';
-    else nivel = 'Ansiedad severa';
-
-    const payload = {
-      edad: data.edad,
-      sexo: data.sexo,
-      profesion: data.profesion,
-      area: data.area,
-      deseaContacto: data.contacto || 'no',
-      email: data.email || '',
-      telefono: data.telefono || '',
-      respuestas: respuestas,
-      total: total,
-      nivel: nivel
-    };
-
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://script.google.com/macros/s/AKfycby4PH7tj-uQRogD9SNTIJZoNRvnjvI3OIn_PDiSMC_WBG1EDjsPhKSfmdG9oF7m00oApw/exec");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        form.innerHTML = '<p class="text-green-600 font-bold text-xl mt-6">¡Gracias por completar el formulario!</p>';
-      } else {
-        boton.disabled = false;
-        boton.innerText = 'Enviar';
-        alert('Ocurrió un error. Por favor, intentá de nuevo.');
-      }
-    };
-    xhr.send(JSON.stringify(payload));
-  });
-});
-</script></body>
+</body>
 </html>
