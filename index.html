@@ -113,12 +113,10 @@
       let respuestas = [];
 
       for (let i = 1; i <= 21; i++) {
-        let val = parseInt(form[`p${i}`].value);
-        total += val;
+        const val = form[`p${i}`]?.value ?? "0";
+        total += parseInt(val);
         respuestas.push(val);
       }
-
-      const nivel = obtenerNivel(total);
 
       const datos = {
         edad: form.edad.value,
@@ -129,7 +127,7 @@
         email: form.email?.value || "",
         telefono: form.telefono?.value || "",
         total,
-        nivel
+        nivel: obtenerNivel(total)
       };
 
       respuestas.forEach((val, idx) => {
