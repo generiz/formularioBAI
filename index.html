@@ -17,34 +17,30 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes bounceSlow {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    .animate-bounce-slow {
-      animation: bounceSlow 1.6s infinite;
+    .dibujar {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: dibujar 2s ease forwards;
     }
 
-    .heart-outline path {
-      animation: drawHeart 2s ease-out forwards;
-      animation-delay: 1s;
+    @keyframes dibujar {
+      to { stroke-dashoffset: 0; }
     }
-    @keyframes drawHeart {
-      to {
-        stroke-dashoffset: 0;
-      }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      backdrop-filter: blur(3px);
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-indigo-100 min-h-screen flex flex-col items-center justify-start p-6 scroll-smooth">
-
-  <!-- Overlay de carga -->
-  <div id="overlay" class="fixed inset-0 bg-white bg-opacity-70 backdrop-blur-sm z-50 hidden flex flex-col items-center justify-center space-y-4">
-    <div class="text-indigo-800 text-xl font-semibold animate-pulse">Enviando formulario...</div>
-    <div class="text-6xl animate-bounce-slow">🧩</div>
-  </div>
-
-  <div class="max-w-3xl w-full bg-white rounded-2xl shadow-xl p-8 mt-6 transition duration-500 ease-in-out fade-in">
+<body class="bg-gradient-to-br from-gray-50 to-indigo-100 min-h-screen flex flex-col items-center justify-start p-6 scroll-smooth relative">
+  <div class="max-w-3xl w-full bg-white rounded-2xl shadow-xl p-8 mt-6 transition duration-500 ease-in-out fade-in" id="formContainer">
     <h1 class="text-3xl sm:text-4xl font-extrabold text-indigo-800 text-center mb-4 tracking-tight">Inventario de Ansiedad de Beck (BAI)</h1>
     <p class="text-center text-base sm:text-lg text-gray-700 mb-6 leading-relaxed">
       Este formulario es parte de un estudio académico realizado por <strong>Viviana Samudio</strong>.<br/>
@@ -86,22 +82,20 @@
       <button class="bg-indigo-600 text-white font-bold py-2 px-6 rounded-xl hover:bg-indigo-700 transition duration-300 ease-in-out shadow-lg" type="submit">Enviar respuestas</button>
     </form>
 
-    <!-- Firma con corazón animado -->
-    <p class="mt-10 text-center text-sm text-gray-600 italic leading-relaxed relative">
+    <p class="mt-10 text-center text-sm text-gray-600 italic leading-relaxed">
       Gracias por tu tiempo y por contribuir a esta investigación.<br/>
-      Con cariño y compromiso académico,<br/>
-      <span class="font-semibold text-gray-800">Viviana Samudio</span>
-      <svg class="inline-block align-middle ml-2 heart-outline" viewBox="0 0 32 29.6" width="30" height="28">
-        <path d="M23.6,0c-3.4,0-6.4,2.1-7.6,5.1C14.8,2.1,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.1,16,21.2,16,21.2s16-12.1,16-21.2
-          C32,3.8,28.2,0,23.6,0z"
-          fill="none"
-          stroke="#EC4899"
-          stroke-width="2"
-          stroke-dasharray="100"
-          stroke-dashoffset="100"
-        />
-      </svg>
+      Con cariño y compromiso académico,<br/><strong>Viviana Samudio</strong>
     </p>
+  </div>
+
+  <div id="mensajeExito" class="overlay hidden">
+    <div class="text-center">
+      <p class="text-xl sm:text-2xl text-gray-800 font-semibold mb-4">Muchas gracias por tu colaboración en este estudio.<br>Con cariño,<br><strong>Vivi</strong></p>
+      <svg width="120" height="110" viewBox="0 0 120 110" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+        <path class="dibujar" d="M60 100s-26-15-40-35C5 45 25 10 60 35 95 10 115 45 100 65 86 85 60 100 60 100Z"
+          stroke="#9333ea" stroke-width="3" fill="none" />
+      </svg>
+    </div>
   </div>
 
   <script>
@@ -146,11 +140,6 @@
     document.getElementById("baiForm").addEventListener("submit", function (e) {
       e.preventDefault();
       const form = e.target;
-
-      document.getElementById("overlay").classList.remove("hidden");
-      const boton = form.querySelector("button[type='submit']");
-      boton.disabled = true;
-
       let total = 0;
       let respuestas = [];
 
@@ -179,27 +168,15 @@
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "https://api.sheetbest.com/sheets/2968cb91-4c4a-4170-a81c-dccf8d62717d", true);
       xhr.setRequestHeader("Content-Type", "application/json");
-
       xhr.onload = function () {
-        document.getElementById("overlay").classList.add("hidden");
-        boton.disabled = false;
-
         if (xhr.status === 200 || xhr.status === 201) {
-          alert("¡Formulario enviado con éxito! Muchas gracias por participar.");
+          document.getElementById("formContainer").classList.add("blur-sm");
+          document.getElementById("mensajeExito").classList.remove("hidden");
           form.reset();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
           alert("Error al enviar el formulario.");
-          console.error(xhr.responseText);
         }
       };
-
-      xhr.onerror = function () {
-        document.getElementById("overlay").classList.add("hidden");
-        boton.disabled = false;
-        alert("Error al conectar con el servidor.");
-      };
-
       xhr.send(JSON.stringify(datos));
     });
   </script>
