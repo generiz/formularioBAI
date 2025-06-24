@@ -111,11 +111,13 @@
       const form = e.target;
       let total = 0;
       let respuestas = [];
+
       for (let i = 1; i <= 21; i++) {
         let val = parseInt(form[`p${i}`].value);
         total += val;
         respuestas.push(val);
       }
+
       const nivel = obtenerNivel(total);
 
       const datos = {
@@ -127,9 +129,12 @@
         email: form.email?.value || "",
         telefono: form.telefono?.value || "",
         total,
-        nivel,
-        respuestas: respuestas.join(", ")
+        nivel
       };
+
+      respuestas.forEach((val, idx) => {
+        datos[`r${idx + 1}`] = val;
+      });
 
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "https://api.sheetbest.com/sheets/2968cb91-4c4a-4170-a81c-dccf8d62717d", true);
